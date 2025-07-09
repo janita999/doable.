@@ -23,23 +23,22 @@ def generate_guide(data):
         "The guide should be actionable, detailed, and tailored to their background. "
         "Include as many steps as needed, with practical instructions and tips."
     )
-    # Example Gemini API call (replace with actual endpoint and parameters)
-response = requests.post(
-    "https://generativelanguage.googleapis.com/v1/models/gemini-1.0-pro-latest:generateContent",
-    params={"key": api_key},
-    json={
-        "contents": [{"parts": [{"text": prompt}]}]
-    }
-)
+    response = requests.post(
+        "https://generativelanguage.googleapis.com/v1/models/gemini-1.0-pro-latest:generateContent",
+        params={"key": api_key},
+        json={
+            "contents": [{"parts": [{"text": prompt}]}]
+        }
+    )
     result = response.json()
     print(result)  # Debug: see the actual response
-    # Extract the generated text (adjust based on actual API response structure)
+
     if "candidates" in result:
-      guide = result['candidates'][0]['content']['parts'][0]['text']
+        guide = result['candidates'][0]['content']['parts'][0]['text']
     elif "error" in result:
-      guide = f"Error from Gemini API: {result['error'].get('message', 'Unknown error')}"
+        guide = f"Error from Gemini API: {result['error'].get('message', 'Unknown error')}"
     else:
-      guide = "Unexpected response from Gemini API."
+        guide = "Unexpected response from Gemini API."
     return guide
 
 @app.route('/generate-guide', methods=['POST'])
