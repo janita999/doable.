@@ -2,6 +2,16 @@ from flask import Flask, request, send_file, jsonify
 from flask_cors import CORS
 import os
 import pdfkit
+import requests
+import os
+
+def list_gemini_models():
+    api_key = os.environ.get('GEMINI_API_KEY')
+    response = requests.get(
+        "https://generativelanguage.googleapis.com/v1/models",
+        params={"key": api_key}
+    )
+    print("Available models:", response.json())
 
 app = Flask(__name__, static_folder='.', static_url_path='')
 CORS(app)
@@ -63,5 +73,10 @@ def root():
 
 import os
 if __name__ == '__main__':
+       list_gemini_models() 
        port = int(os.environ.get('PORT', 10000))
        app.run(host='0.0.0.0', port=port)
+    import requests
+import os
+
+
