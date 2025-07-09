@@ -64,13 +64,13 @@ document.getElementById('business-form').addEventListener('submit', async functi
   });
   const data = await response.json();
 
-  // Split the guide into steps using 'Step' as a delimiter
+  // Split the guide into steps using regex for "Step X:"
   const steps = data.guide.split(/Step \\d+:/).filter(Boolean).map(s => s.trim());
 
   // Create a numbered list
   let guideHtml = '<h2>Your Step-by-Step Guide</h2><ol>';
   steps.forEach(step => {
-    guideHtml += `<li>${step}</li>`;
+    guideHtml += `<li style="margin-bottom: 1rem; text-align: left;">${step}</li>`;
   });
   guideHtml += '</ol>';
 
