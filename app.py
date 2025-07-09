@@ -7,16 +7,33 @@ app = Flask(__name__, static_folder='.', static_url_path='')
 CORS(app)
 
 # Placeholder for Gemini API integration
+import requests
+import os
+
 def generate_guide(data):
-    # Here you would call the Gemini API with user data
-    # For now, return a dummy guide
-    guide = f"""
-    Step 1: Research your business idea: {data.get('business_ideas')}
-    Step 2: Assess your skills: {data.get('skills_interests')}
-    Step 3: Plan your budget: {data.get('budget')}
-    Step 4: Set up in {data.get('location')}
-    Step 5: Start your business!
-    """
+    api_key = os.environ.get('GEMINI_API_KEY')
+    prompt = (
+        f"Create a detailed, step-by-step guide for a young entrepreneur (age group: {data.get('age_group')}) "
+        f"who wants to start a {data.get('business_type')} in {data.get('location')}. "
+        f"Business idea: {data.get('business_ideas')}. "
+        f"Time commitment: {data.get('time_commitment')} hours/week. "
+        f"Budget: {data.get('budget')}. "
+        f"Skills/interests: {data.get('skills_interests')}. "
+        f"Additional details: {data.get('additional_details')}. "
+        "The guide should be actionable, detailed, and tailored to their background. "
+        "Include as many steps as needed, with practical instructions and tips."
+    )
+    # Example Gemini API call (replace with actual endpoint and parameters)
+    response = requests.post(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent",
+        params={"key": api_key},
+        json={
+            "contents": [{"parts": [{"text": prompt}]}]
+        }
+    )
+    result = response.json()
+    # Extract the generated text (adjust based on actual API response structure)
+    guide = result['candidates'][0]['content']['parts'][0]['text']
     return guide
 
 @app.route('/generate-guide', methods=['POST'])
