@@ -24,13 +24,13 @@ def generate_guide(data):
         "Include as many steps as needed, with practical instructions and tips."
     )
     # Example Gemini API call (replace with actual endpoint and parameters)
-    response = requests.post(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent",
-        params={"key": api_key},
-        json={
-            "contents": [{"parts": [{"text": prompt}]}]
-        }
-    )
+response = requests.post(
+    "https://generativelanguage.googleapis.com/v1/models/gemini-1.0-pro-latest:generateContent",
+    params={"key": api_key},
+    json={
+        "contents": [{"parts": [{"text": prompt}]}]
+    }
+)
     result = response.json()
     print(result)  # Debug: see the actual response
     # Extract the generated text (adjust based on actual API response structure)
