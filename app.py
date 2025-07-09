@@ -33,13 +33,13 @@ def generate_guide(data):
         "The guide should be actionable, detailed, and tailored to their background. "
         "Include as many steps as needed, with practical instructions and tips."
     )
-    response = requests.post(
-        "https://generativelanguage.googleapis.com/v1/models/gemini-1.0-pro-latest:generateContent",
-        params={"key": api_key},
-        json={
-            "contents": [{"parts": [{"text": prompt}]}]
-        }
-    )
+  response = requests.post(
+    "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro-002:generateContent",
+    params={"key": api_key},
+    json={
+        "contents": [{"parts": [{"text": prompt}]}]
+    }
+)
     result = response.json()
     print(result)  # Debug: see the actual response
 
@@ -73,7 +73,6 @@ def root():
 
 import os
 if __name__ == '__main__':
-       list_gemini_models() 
        port = int(os.environ.get('PORT', 10000))
        app.run(host='0.0.0.0', port=port)
 import requests
