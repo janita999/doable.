@@ -32,8 +32,14 @@ def generate_guide(data):
         }
     )
     result = response.json()
+    print(result)  # Debug: see the actual response
     # Extract the generated text (adjust based on actual API response structure)
-    guide = result['candidates'][0]['content']['parts'][0]['text']
+      if "candidates" in result:
+      guide = result['candidates'][0]['content']['parts'][0]['text']
+  elif "error" in result:
+      guide = f"Error from Gemini API: {result['error'].get('message', 'Unknown error')}"
+  else:
+      guide = "Unexpected response from Gemini API."
     return guide
 
 @app.route('/generate-guide', methods=['POST'])
