@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>doable. | Your Guide</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">doable.</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="faqs.html">FAQs</a></li>
+      <li><a href="get-started.html">Get Started</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section class="guide">
+      <h1>Your Step-by-Step Business Guide</h1>
+      <div id="guide-content">
+        <!-- The AI-generated guide will appear here -->
+        <p><em>Your personalized guide will appear here after you complete the quiz.</em></p>
+      </div>
+      <button id="download-pdf" class="cta" style="display:none;">Download as PDF</button>
+    </section>
+  </main>
+  <script>
+    // Placeholder: Show download button if guide content is present
+    const guideContent = document.getElementById('guide-content');
+    const downloadBtn = document.getElementById('download-pdf');
+    if (guideContent && guideContent.innerText.trim() !== '') {
+      downloadBtn.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

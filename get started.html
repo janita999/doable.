@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>doable. | Get Started</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">doable.</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="faqs.html">FAQs</a></li>
+      <li><a href="get-started.html" class="active">Get Started</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section class="get-started">
+      <h1>Get Started</h1>
+      <form id="business-form" action="/generate-guide" method="POST">
+        <label>Age Group
+          <select name="age_group" required>
+            <option value="15-16">15-16</option>
+            <option value="17-18">17-18</option>
+            <option value="19-20">19-20</option>
+            <option value="21-22">21-22</option>
+            <option value="23+">23+</option>
+          </select>
+        </label>
+        <label>Business Type
+          <input type="text" name="business_type" required placeholder="e.g. online store, tutoring, etc.">
+        </label>
+        <label>Location
+          <input type="text" name="location" required placeholder="City, Country">
+        </label>
+        <label>Business Ideas
+          <input type="text" name="business_ideas" required placeholder="Describe your idea(s)">
+        </label>
+        <label>Time Commitment (hours/week)
+          <input type="number" name="time_commitment" min="1" required>
+        </label>
+        <label>Available Budget Range
+          <input type="text" name="budget" required placeholder="$100-$500, etc.">
+        </label>
+        <label>Skills and Interests
+          <input type="text" name="skills_interests" required placeholder="e.g. design, marketing, tech, etc.">
+        </label>
+        <label>Additional Details
+          <textarea name="additional_details" rows="3" placeholder="Anything else we should know?"></textarea>
+        </label>
+        <button type="submit" class="cta">Generate My Guide</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
