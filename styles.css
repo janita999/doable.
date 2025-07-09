@@ -107,3 +107,11 @@ input:focus, select:focus, textarea:focus {
     font-size: 1.2rem;
   }
 }
+.get-started ol {
+  margin-top: 1.5rem;
+  padding-left: 1.5rem;
+}
+.get-started li {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
