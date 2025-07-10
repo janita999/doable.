@@ -20,35 +20,42 @@ CORS(app)
 import requests
 import os
 
-def generate_guide(data):
-    api_key = os.environ.get('GEMINI_API_KEY')
-    prompt = (
-        f"Create a detailed, step-by-step guide for a young entrepreneur (age group: {data.get('age_group')}) "
-        f"who wants to start a {data.get('business_type')} in {data.get('location')}. "
-        f"Business idea: {data.get('business_ideas')}. "
-        f"Time commitment: {data.get('time_commitment')} hours/week. "
-        f"Budget: {data.get('budget')}. "
-        f"Skills/interests: {data.get('skills_interests')}. "
-        f"Additional details: {data.get('additional_details')}. "
-        "The guide should be actionable, detailed, and tailored to their background. "
-        "Include as many steps as needed, with practical instructions and tips."
-    )
-    response = requests.post(
-        "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro-002:generateContent",
-        params={"key": api_key},
-        json={
-            "contents": [{"parts": [{"text": prompt}]}]
-        }
-    )
-    result = response.json()
-    print(result)  # Debug: see the actual response
+import json
+import urllib.request
 
-    if "candidates" in result:
-        guide = result['candidates'][0]['content']['parts'][0]['text']
-    elif "error" in result:
-        guide = f"Error from Gemini API: {result['error'].get('message', 'Unknown error')}"
-    else:
-        guide = "Unexpected response from Gemini API."
+def generate_guide(data):
+    api_key = "AIzaSyDtPT1T-7plg6ncewetLEv7xWwdi3VV2pM"  # <-- PUT YOUR GEMINI API KEY HERE
+    endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={api_key}"
+
+    prompt = f"""
+    Give me a step-by-step business guide based on:
+    - Business idea: {data.get('business_ideas')}
+    - Skills/Interests: {data.get('skills_interests')}
+    - Budget: {data.get('budget')}
+    - Location: {data.get('location')}
+    """
+
+    headers = {
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "contents": [
+            {
+                "parts": [
+                    {"text": prompt}
+                ]
+            }
+        ]
+    }
+
+    req = urllib.request.Request(endpoint, data=json.dumps(payload).encode('utf-8'), headers=headers)
+    try:
+        with urllib.request.urlopen(req) as response:
+            result = json.loads(response.read().decode())
+            guide = result['candidates'][0]['content']['parts'][0]['text']
+    except Exception as e:
+        guide = f"Error from Gemini API: {e}"
+
     return guide
 
 @app.route('/generate-guide', methods=['POST'])
