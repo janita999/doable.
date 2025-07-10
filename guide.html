@@ -28,7 +28,7 @@
   </main>
   <script>
     // Placeholder: Show download button if guide content is present
-    const guideContent = document.getElementById('guide-content');
+    document.getElementById('guide-result').innerHTML = data.guide;
     const downloadBtn = document.getElementById('download-pdf');
     if (guideContent && guideContent.innerText.trim() !== '') {
       downloadBtn.style.display = 'block';
