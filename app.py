@@ -26,13 +26,15 @@ import urllib.request
 def generate_guide(data):
     api_key = "AIzaSyDtPT1T-7plg6ncewetLEv7xWwdi3VV2pM"  # <-- PUT YOUR GEMINI API KEY HERE
     endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIzaSyDtPT1T-7plg6ncewetLEv7xWwdi3VV2pM"
-    prompt = f"""
-    Give me a step-by-step business guide based on:
-    - Business idea: {data.get('business_ideas')}
-    - Skills/Interests: {data.get('skills_interests')}
-    - Budget: {data.get('budget')}
-    - Location: {data.get('location')}
-    """
+      prompt = f"""
+   Give me a detailed, step-by-step business guide based on the following information:
+   - Business idea: {data.get('business_ideas')}
+   - Skills/Interests: {data.get('skills_interests')}
+   - Budget: {data.get('budget')}
+   - Location: {data.get('location')}
+
+   Format your answer as an HTML ordered list (<ol><li>...</li></ol>), with each step as a separate <li> item. Use <ul><li> for sub-steps if needed. Do not include any text outside the HTML list.
+   """
 
     headers = {
         "Content-Type": "application/json"
