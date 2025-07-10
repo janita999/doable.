@@ -25,7 +25,7 @@ import urllib.request
 
 def generate_guide(data):
     api_key = "AIzaSyDtPT1T-7plg6ncewetLEv7xWwdi3VV2pM"  # <-- PUT YOUR GEMINI API KEY HERE
-    endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyDtPT1T-7plg6ncewetLEv7xWwdi3VV2pM"
+       endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIzaSyDtPT1T-7plg6ncewetLEv7xWwdi3VV2pM"
     prompt = f"""
     Give me a step-by-step business guide based on:
     - Business idea: {data.get('business_ideas')}
