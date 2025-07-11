@@ -1,8 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root {
+  --black: #2e2e2e;
+  --white: #ffffff;
+  --earth: #f4f1ec;
+  --forest: #3a5a40;
+  --sand: #d6c9b7;
+  --text: #2e2e2e;
+}
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #f8f6f2; /* lighter, more pastel beige */
-  color: #2c1810; /* coffee brown text */
+  font-family: 'Playfair Display', serif;
+  background: var(--earth);
+  color: var(--text);
 }
 
 nav {
@@ -10,16 +21,17 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background: #ffffff; /* white background */
-  border-bottom: 2px solid #87ceeb; /* pastel blue border */
-  box-shadow: 0 2px 8px rgba(135, 206, 235, 0.1); /* pastel blue shadow */
+  background: var(--white);
+  border-bottom: 2px solid var(--sand);
+  box-shadow: 0 2px 8px rgba(54, 90, 64, 0.1);
 }
 
 .logo {
-  font-weight: bold;
-  font-size: 1.5rem;
+  font-weight: 700;
+  font-size: 1.8rem;
   letter-spacing: 1px;
-  color: #000000; /* black logo */
+  color: var(--black);
+  font-family: 'Playfair Display', serif;
 }
 
 nav ul {
@@ -32,16 +44,17 @@ nav ul {
 
 nav a {
   text-decoration: none;
-  color: #2c1810; /* coffee brown */
+  color: var(--text);
   font-weight: 500;
   padding: 0.3rem 0.7rem;
   border-radius: 4px;
   transition: all 0.2s;
+  font-family: 'Playfair Display', serif;
 }
 
 nav a.active, nav a:hover {
-  background: #87ceeb; /* pastel blue hover */
-  color: #ffffff; /* white text on hover */
+  background: var(--forest);
+  color: var(--white);
   transform: translateY(-1px);
 }
 
@@ -49,10 +62,10 @@ main {
   max-width: 600px;
   margin: 2.5rem auto;
   padding: 2rem;
-  background: #ffffff; /* white background */
+  background: var(--white);
   border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(135, 206, 235, 0.15); /* pastel blue shadow */
-  border: 1px solid #e8f4f8; /* very light pastel blue border */
+  box-shadow: 0 4px 20px rgba(54, 90, 64, 0.1);
+  border: 1px solid var(--sand);
 }
 
 .hero {
@@ -61,24 +74,26 @@ main {
 }
 
 .hero h1 {
-  color: #000000; /* black main heading */
-  font-size: 2.5rem;
+  color: var(--black);
+  font-size: 2.8rem;
   margin-bottom: 1rem;
   font-weight: 700;
-  text-shadow: 0 2px 4px rgba(135, 206, 235, 0.1); /* pastel blue text shadow */
+  font-family: 'Playfair Display', serif;
+  text-shadow: 0 2px 4px rgba(54, 90, 64, 0.1);
 }
 
 .hero p {
-  color: #2c1810; /* coffee brown text */
-  font-size: 1.1rem;
+  color: var(--text);
+  font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 2rem;
+  font-family: 'Playfair Display', serif;
 }
 
 .cta {
   display: inline-block;
-  background: linear-gradient(135deg, #87ceeb, #5f9ea0); /* pastel blue gradient */
-  color: #ffffff; /* white text */
+  background: var(--forest);
+  color: var(--white);
   border: none;
   border-radius: 25px;
   padding: 1rem 2rem;
@@ -88,13 +103,14 @@ main {
   margin-top: 1.5rem;
   transition: all 0.3s;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(135, 206, 235, 0.3);
+  box-shadow: 0 4px 15px rgba(54, 90, 64, 0.2);
+  font-family: 'Playfair Display', serif;
 }
 
 .cta:hover {
-  background: linear-gradient(135deg, #5f9ea0, #4682b4); /* darker blue gradient on hover */
+  background: var(--black);
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(135, 206, 235, 0.4);
+  box-shadow: 0 6px 20px rgba(54, 90, 64, 0.3);
 }
 
 form {
@@ -106,44 +122,49 @@ form {
 label {
   font-weight: 500;
   margin-bottom: 0.3rem;
-  color: #2c1810; /* coffee brown */
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
 }
 
 input, select, textarea {
   padding: 0.8rem;
-  border: 2px solid #e8f4f8; /* very light pastel blue border */
+  border: 2px solid var(--sand);
   border-radius: 8px;
   font-size: 1rem;
   margin-top: 0.3rem;
-  background: #f8f6f2; /* pastel beige background */
-  color: #2c1810; /* coffee brown text */
+  background: var(--earth);
+  color: var(--text);
   transition: all 0.2s;
+  font-family: 'Playfair Display', serif;
 }
 
 input:focus, select:focus, textarea:focus {
   outline: none;
-  border-color: #87ceeb; /* pastel blue focus */
-  background: #ffffff; /* white background on focus */
-  box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.1); /* pastel blue glow */
+  border-color: var(--forest);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(54, 90, 64, 0.1);
 }
 
 .faqs .faq-item {
   margin-bottom: 1.5rem;
   padding: 1.2rem;
-  background: linear-gradient(135deg, #f8f6f2, #f0f8ff); /* beige to pastel blue gradient */
+  background: linear-gradient(135deg, var(--earth), var(--white));
   border-radius: 12px;
-  border-left: 4px solid #87ceeb; /* pastel blue accent */
-  box-shadow: 0 2px 8px rgba(135, 206, 235, 0.1);
+  border-left: 4px solid var(--forest);
+  box-shadow: 0 2px 8px rgba(54, 90, 64, 0.1);
 }
 
 .faqs h2 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin-bottom: 0.3rem;
-  color: #000000; /* black headings */
+  color: var(--black);
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
 }
 
 .faqs p {
-  color: #2c1810; /* coffee brown text */
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
 }
 
 .guide {
@@ -151,64 +172,93 @@ input:focus, select:focus, textarea:focus {
 }
 
 .guide h2 {
-  color: #000000; /* black headings */
-  border-bottom: 3px solid #87ceeb; /* pastel blue underline */
+  color: var(--black);
+  border-bottom: 3px solid var(--forest);
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
 }
 
 .guide ol {
-  color: #2c1810; /* coffee brown text */
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
 }
 
 .guide li {
   margin-bottom: 1rem;
   line-height: 1.6;
   padding: 0.5rem;
-  background: #f8f6f2; /* pastel beige background */
+  background: var(--earth);
   border-radius: 6px;
-  border-left: 3px solid #87ceeb; /* pastel blue accent */
+  border-left: 3px solid var(--forest);
+  font-family: 'Playfair Display', serif;
 }
 
 /* Loading screen colors */
 .loading-screen {
-  background: rgba(248, 246, 242, 0.95); /* pastel beige overlay */
+  background: rgba(244, 241, 236, 0.95);
 }
 
 .spinner {
-  border: 4px solid #e8f4f8; /* very light pastel blue border */
-  border-top: 4px solid #87ceeb; /* pastel blue spinner */
+  border: 4px solid var(--sand);
+  border-top: 4px solid var(--forest);
 }
 
 .loading-text {
-  color: #2c1810; /* coffee brown */
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
 }
 
 .loading-subtext {
-  color: #8b7355; /* lighter coffee brown */
+  color: var(--forest);
+  font-family: 'Playfair Display', serif;
 }
 
 /* Additional colorful elements */
 .get-started h1 {
-  background: linear-gradient(135deg, #87ceeb, #5f9ea0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 2.2rem;
+  color: var(--black);
+  font-size: 2.4rem;
   margin-bottom: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
 }
 
 /* Button hover effects for form submit */
 button[type="submit"].cta {
-  background: linear-gradient(135deg, #87ceeb, #5f9ea0);
+  background: var(--forest);
   border-radius: 25px;
-  box-shadow: 0 4px 15px rgba(135, 206, 235, 0.3);
+  box-shadow: 0 4px 15px rgba(54, 90, 64, 0.2);
+  font-family: 'Playfair Display', serif;
 }
 
 button[type="submit"].cta:hover {
-  background: linear-gradient(135deg, #5f9ea0, #4682b4);
+  background: var(--black);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(135, 206, 235, 0.4);
+  box-shadow: 0 6px 20px rgba(54, 90, 64, 0.3);
+}
+
+/* About page styling */
+.about h1, .about h2 {
+  color: var(--black);
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+}
+
+.about p {
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  line-height: 1.6;
+}
+
+/* FAQs page styling */
+.faqs h1 {
+  color: var(--black);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 @media (max-width: 700px) {
@@ -224,13 +274,25 @@ button[type="submit"].cta:hover {
   }
   
   .logo {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
   
   .hero h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 }
+  
+ 
+
+  
+
+
+
+
+
+
+  
+ 
  
  
 
