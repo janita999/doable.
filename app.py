@@ -1,9 +1,13 @@
-from flask import Flask, request, send_file, jsonify
+from flask import Flask, request, send_file, jsonify, session
 from flask_cors import CORS
 import os
 import pdfkit
 import requests
-import os
+
+app = Flask(__name__, static_folder='.', static_url_path='')
+CORS(app)
+
+# Set the secret key AFTER creating the app
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'your-secret-key')
 def list_gemini_models():
     api_key = os.environ.get('GEMINI_API_KEY')
