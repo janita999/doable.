@@ -20,67 +20,67 @@
     <section class="guide">
       <h1>Your Step-by-Step Business Guide</h1>
       <div id="guide-content">
-        <!-- The AI-generated guide will appear here -->
         <p><em>Your personalized guide will appear here after you complete the quiz.</em></p>
       </div>
-      <button id="download-pdf" class="cta" style="display:none;">Download as PDF</button>
+      <button id="download-pdf" class="cta" style="display:none; margin-top:1.5rem;">Download Guide as PDF</button>
+      <div class="chatbox" style="display:none; margin-top:2rem;">
+        <div id="chat-history" class="chat-history"></div>
+        <form id="chat-form">
+          <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off" required>
+          <button type="submit">Send</button>
+        </form>
+      </div>
     </section>
   </main>
   <script>
-    // Placeholder: Show download button if guide content is present
-    document.getElementById('guide-result').innerHTML = data.guide;
-    const downloadBtn = document.getElementById('download-pdf');
-    if (guideContent && guideContent.innerText.trim() !== '') {
-      downloadBtn.style.display = 'block';
+    // This function should be called when the guide is ready (after form submission)
+    function showGuide(guideHtml) {
+      document.getElementById('guide-content').innerHTML = guideHtml;
+      document.getElementById('download-pdf').style.display = 'block';
+      document.querySelector('.chatbox').style.display = 'block';
     }
-  </script>
-<div class="chatbox">
-  <div id="chat-history" class="chat-history"></div>
-  <form id="chat-form">
-    <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off" required>
-    <button type="submit">Send</button>
-  </form>
-</div>
-<script>
-const chatForm = document.getElementById('chat-form');
-const chatInput = document.getElementById('chat-input');
-const chatHistoryDiv = document.getElementById('chat-history');
 
-chatForm.addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const message = chatInput.value;
-  chatInput.value = '';
-  chatHistoryDiv.innerHTML += `<div class="user-msg"><b>You:</b> ${message}</div>`;
-  const response = await fetch('/chat', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({message})
-  });
-  const data = await response.json();
-  chatHistoryDiv.innerHTML += `<div class="ai-msg"><b>AI:</b> ${data.reply}</div>`;
-  chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
-});
-</script>
-<button id="download-pdf" class="cta">Download Guide as PDF</button>
-<script>
-document.getElementById('download-pdf').addEventListener('click', async function() {
-  // Get the guide content (customize selector as needed)
-  const guideHtml = document.querySelector('.guide').innerHTML;
-  const response = await fetch('/download-pdf', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({guide: guideHtml})
-  });
-  const blob = await response.blob();
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'business_guide.pdf';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  window.URL.revokeObjectURL(url);
-});
-</script>
+    // Example: Uncomment the next line to test the UI manually
+    // showGuide('<ol><li>Step 1: Example step</li><li>Step 2: Another step</li></ol>');
+
+    // PDF download handler
+    document.getElementById('download-pdf').addEventListener('click', async function() {
+      const guideHtml = document.getElementById('guide-content').innerHTML;
+      const response = await fetch('/download-pdf', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({guide: guideHtml})
+      });
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'business_guide.pdf';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    });
+
+    // Chatbox handler
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatHistoryDiv = document.getElementById('chat-history');
+
+    chatForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const message = chatInput.value;
+      chatInput.value = '';
+      chatHistoryDiv.innerHTML += `<div class="user-msg"><b>You:</b> ${message}</div>`;
+      const response = await fetch('/chat', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({message})
+      });
+      const data = await response.json();
+      chatHistoryDiv.innerHTML += `<div class="ai-msg"><b>AI:</b> ${data.reply}</div>`;
+      chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
+    });
+  </script>
 </body>
 </html>
