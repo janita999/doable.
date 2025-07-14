@@ -281,7 +281,32 @@ button[type="submit"].cta:hover {
     font-size: 2.2rem;
   }
 }
-  
+.chatbox {
+  margin-top: 2rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fafbfc;
+  max-width: 600px;
+}
+.chat-history {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+.user-msg, .ai-msg {
+  margin-bottom: 0.5rem;
+}
+.user-msg { text-align: right; }
+.ai-msg { text-align: left; }
+#chat-form {
+  display: flex;
+  gap: 0.5rem;
+}
+#chat-input {
+  flex: 1;
+  padding: 0.5rem;
+}
  
 
   
