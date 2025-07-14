@@ -91,52 +91,29 @@
     </section>
   </main>
 <script>
-  document.getElementById('business-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    // Show loading screen
-    const loadingScreen = document.getElementById('loading-screen');
-    loadingScreen.style.display = 'flex';
-
-    try {
-      const formData = new FormData(this);
-      const response = await fetch('/generate-guide', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate guide');
-      }
-
-      const data = await response.json();
-
-      // Split the guide into steps using 'Step' as a delimiter
-      const steps = data.guide.split(/Step \\d+:/).filter(Boolean).map(s => s.trim());
-
-      // Create a numbered list
-      let guideHtml = '<h2>Your Step-by-Step Guide</h2><ol>';
-      steps.forEach(step => {
-        guideHtml += `<li>${step}</li>`;
-      });
-      guideHtml += '</ol>';
-
-      // Show the guide on the page (replace the form)
-      document.querySelector('.get-started').innerHTML = guideHtml;
-
-    } catch (error) {
-      console.error('Error:', error);
-      // Show error message
-      document.querySelector('.get-started').innerHTML = `
-        <h2>Oops! Something went wrong</h2>
-        <p>We couldn't generate your guide right now. Please try again later.</p>
-        <button onclick="location.reload()" class="cta">Try Again</button>
-      `;
-    } finally {
-      // Hide loading screen
-      loadingScreen.style.display = 'none';
-    }
+document.getElementById('business-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const formData = new FormData(this);
+  const response = await fetch('/generate-guide', {
+    method: 'POST',
+    body: formData
   });
+  const data = await response.json();
+
+  // Split the guide into steps for a neat list
+  const steps = data.guide.split(/Step \d+:/).filter(Boolean).map(s => s.trim());
+  let guideHtml = '<h2>Your Step-by-Step Guide</h2><ol>';
+  steps.forEach(step => {
+    guideHtml += `<li>${step}</li>`;
+  });
+  guideHtml += '</ol>';
+
+  // Save the guide HTML to localStorage so guide.html can access it
+  localStorage.setItem('doable_guide', guideHtml);
+
+  // Redirect to guide.html
+  window.location.href = 'guide.html';
+});
 </script>
 </body>
 </html>
