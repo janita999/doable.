@@ -4,7 +4,7 @@ import os
 import pdfkit
 import requests
 import os
-
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'your-secret-key')
 def list_gemini_models():
     api_key = os.environ.get('GEMINI_API_KEY')
     response = requests.get(
@@ -87,9 +87,6 @@ import requests
 import os
 from flask import session
 
-# Make sure to set a secret key for sessions
-app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'your-secret-key')
-
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json.get('message')
@@ -106,7 +103,7 @@ def chat():
             prompt += f"AI: {msg['text']}\n"
 
     # Call Gemini API with the full prompt
-    api_key = os.environ.get('AIzaSyDtPT1T-7plg6ncewetLEv7xWwdi3VV2pM')
+    api_key = os.environ.get('GEMINI_API_KEY')
     response = requests.post(
         "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro-002:generateContent",
         params={"key": api_key},
@@ -124,4 +121,3 @@ def chat():
 
     session['chat_history'].append({'role': 'ai', 'text': ai_reply})
     return jsonify({'reply': ai_reply, 'history': session['chat_history']})
-
