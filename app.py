@@ -85,5 +85,43 @@ if __name__ == '__main__':
        app.run(host='0.0.0.0', port=port)
 import requests
 import os
+from flask import session
 
+# Make sure to set a secret key for sessions
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'your-secret-key')
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    user_message = request.json.get('message')
+    if 'chat_history' not in session:
+        session['chat_history'] = []
+    session['chat_history'].append({'role': 'user', 'text': user_message})
+
+    # Build the prompt from chat history
+    prompt = ""
+    for msg in session['chat_history']:
+        if msg['role'] == 'user':
+            prompt += f"User: {msg['text']}\n"
+        else:
+            prompt += f"AI: {msg['text']}\n"
+
+    # Call Gemini API with the full prompt
+    api_key = os.environ.get('GEMINI_API_KEY')
+    response = requests.post(
+        "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro-002:generateContent",
+        params={"key": api_key},
+        json={
+            "contents": [{"parts": [{"text": prompt}]}]
+        }
+    )
+    result = response.json()
+    if "candidates" in result:
+        ai_reply = result['candidates'][0]['content']['parts'][0]['text']
+    elif "error" in result:
+        ai_reply = f"Error: {result['error'].get('message', 'Unknown error')}"
+    else:
+        ai_reply = "Unexpected response from Gemini API."
+
+    session['chat_history'].append({'role': 'ai', 'text': ai_reply})
+    return jsonify({'reply': ai_reply, 'history': session['chat_history']})
 
