@@ -65,3 +65,23 @@ chatForm.addEventListener('submit', async function(e) {
 });
 </script>
 <button id="download-pdf" class="cta">Download Guide as PDF</button>
+<script>
+document.getElementById('download-pdf').addEventListener('click', async function() {
+  // Get the guide content (customize selector as needed)
+  const guideHtml = document.querySelector('.guide').innerHTML;
+  const response = await fetch('/download-pdf', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({guide: guideHtml})
+  });
+  const blob = await response.blob();
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'business_guide.pdf';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  window.URL.revokeObjectURL(url);
+});
+</script>
