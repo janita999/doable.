@@ -106,7 +106,7 @@ def chat():
             prompt += f"AI: {msg['text']}\n"
 
     # Call Gemini API with the full prompt
-    api_key = os.environ.get('GEMINI_API_KEY')
+    api_key = os.environ.get('AIzaSyDtPT1T-7plg6ncewetLEv7xWwdi3VV2pM')
     response = requests.post(
         "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro-002:generateContent",
         params={"key": api_key},
