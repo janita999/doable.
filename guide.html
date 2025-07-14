@@ -33,6 +33,21 @@
     </section>
   </main>
   <script>
+function showGuide(guideHtml) {
+  document.getElementById('guide-content').innerHTML = guideHtml;
+  document.getElementById('download-pdf').style.display = 'block';
+  document.querySelector('.chatbox').style.display = 'block';
+}
+
+// On page load, check if guide is in localStorage and show it
+document.addEventListener('DOMContentLoaded', function() {
+  const guideHtml = localStorage.getItem('doable_guide');
+  if (guideHtml) {
+    showGuide(guideHtml);
+  }
+});
+
+// ... (rest of your chatbox and PDF JS)
     // This function should be called when the guide is ready (after form submission)
     function showGuide(guideHtml) {
       document.getElementById('guide-content').innerHTML = guideHtml;
